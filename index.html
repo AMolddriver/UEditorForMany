@@ -20,13 +20,13 @@
     <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
 </div>
 <div id="btns">
-
         <button onclick="getContent()">获得内容</button>
         <button onclick="getPlainTxt()">获得带格式的纯文本</button>
         <button onclick="hasContent()">判断是否有内容</button>
         <button onclick=" UE.getEditor('editor').setHide()">隐藏编辑器</button>
         <button onclick=" UE.getEditor('editor').setShow()">显示编辑器</button>
         <button onclick=" UE.getEditor('editor').setShow()">显示编辑器</button>
+        <button onclick="submit()">保存</button>
 </div>
 
 
@@ -78,6 +78,10 @@
         for (var i = 0, btn; btn = btns[i++];) {
             UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
         }
+    }
+
+    function submit(){
+
     }
 
 </script>
