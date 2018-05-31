@@ -4,6 +4,11 @@
 <head>
     <title></title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script type="text/javascript">
+        var baseUrl= 'http://127.0.0.1:2797/lumen/public/',
+            ajaxUrl='http://127.0.0.1:2797/lumen/public/index.php/'
+            URL=baseUrl+'edit/';
+        </script>
     <script type="text/javascript" charset="utf-8" src="ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="ueditor.all.js"> </script>
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
@@ -29,19 +34,20 @@
         <button onclick="submit()">保存</button>
 </div>
 
-
+<script type="text/javascript" charset="utf-8" src="jquery-1.10.2.js"></script>
 <script type="text/javascript">
 
     //实例化编辑器
     //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
-    var ue = UE.getEditor('editor'),project_id=1;
+    var ue = UE.getEditor('editor'),project_id;
+
 
     function getContent() {
         var arr = [];
         arr.push("使用editor.getContent()方法可以获得编辑器的内容");
         arr.push("内容为：");
         arr.push(UE.getEditor('editor').getContent());
-        console.log(UE.getEditor('editor').getContent());
+
         alert(arr.join("\n"));
     }
     function getPlainTxt() {
@@ -82,6 +88,20 @@
 
     function submit(){
 
+        var dynamic={
+            'title':'中国掀起一场问责风暴 关系子孙后代',
+            'abstract':'这是摘要',
+            'content':UE.getEditor('editor').getContent()
+        }
+        $.ajax({
+            type: "POST",
+            url: ajaxUrl+'project/dynamic/create',
+            data: dynamic,
+            dataType: "json",
+            success: function(data){
+                console.log(data);
+            }
+        });
     }
 
 </script>
